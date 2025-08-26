@@ -31,6 +31,8 @@ diabetes <- read_xpt(here("data/nhanes_data/2017-2018_Diabetes.XPT"))
 demographics <- read_xpt(here("data/nhanes_data/2017-2018_Demographics.XPT"))
 ```
 
+8/26 updated r version to 4.5.1, installed necessary packages
+
 ### Subset Read-in Datasets
 
 Subset 'diet_behavior' as 'diet'
@@ -159,7 +161,7 @@ df %>%
 probability_consumes_ahi <- 0.36
 ```
 
-#### P(B\|A) 
+#### P(B\|A)
 
 ```{r}
 (probability_has_diabetes * probability_consumes_ahi_given_diabetes) / probability_consumes_ahi
