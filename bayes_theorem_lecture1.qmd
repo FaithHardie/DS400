@@ -274,7 +274,13 @@ data(pop_vs_soda)
 Exploratory Analysis
 
 ```{r}
+?pop_vs_soda
 
+#ggplot(data = pop_vs_soda, aes(x = word_for_cola, fill=region)) +
+  geom_bar()
+
+ggplot(data = pop_vs_soda, aes(x = region, fill=word_for_cola)) +
+  geom_bar()
 ```
 
 1\) Build a prior probability model (an unconditional probability model) with probabilities for where the person is from
@@ -312,29 +318,63 @@ Pop vs Soda - In Class
 Exploratory Analysis
 
 ```{r}
+?pop_vs_soda
 
+#ggplot(data = pop_vs_soda, aes(x = word_for_cola, fill=region)) +
+  geom_bar()
+
+ggplot(data = pop_vs_soda, aes(x = region, fill=word_for_cola)) +
+  geom_bar()
 ```
 
 Prior Probability
 
-```{r}
+P(B) Prior probability the person is from the south
 
+```{r}
+pop_vs_soda %>% 
+  tabyl(region)
+```
+
+```{r}
+#our prior knowledge on population percentage of the US
+
+priors <- c(
+  south=0.39, 
+  midwest=0.21, 
+  northeast = 0.17, 
+  west=0.24
+)
+priors
+```
+
+```{r}
+prior_probability_from_south <- 0.39
 ```
 
 2\) Regional Likelihoods
 
 ```{r}
 
+liklihoods <- pop_vs_soda %>% 
+  tabyl(pop, region)%>% 
+  adorn_percentages("col")%>%  
+  filter(pop == "TRUE") %>%  
+  select(-pop) %>%
+  unlist()
+
+liklihoods
 ```
 
 ```{r}
-
+probability_says_pop_given_from_south <- 0.079
 ```
 
 3\) Marginal prior probability that a person uses the word pop
 
 ```{r}
-
+prior_probability_says_pop <- sum(priors*liklihoods)
+prior_probability_says_pop
 ```
 
 ```{r}
@@ -342,6 +382,10 @@ Prior Probability
 ```
 
 4\) Finding our posterior probability P(S\|A)
+
+```{r}
+(prior_probability_from_south * probability_says_pop_given_from_south)/  prior_probability_says_pop
+```
 
 ```{r}
 
