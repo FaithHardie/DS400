@@ -176,7 +176,7 @@ df_age has two columns I need to manipulate. First, I need to change Ridageyr, w
   #filter(RIDAGEYR %in% c(1, 2)) 
 df_age <- df_age %>%
   filter(!is.na(RIDAGEYR)) %>%
-  mutate(age_group = ifelse(RIDAGEYR < 40, 1, 2)) %>%
+  mutate(age_group = ifelse(RIDAGEYR < 40, 2, 1)) %>%
   filter(age_group %in% c(1, 2)) %>% 
   mutate(age_group = ifelse(age_group == 1, "Over 40", "under 40"))
 
@@ -198,3 +198,43 @@ Now I am ready to do some exploratory analysis.
 ggplot(data= df_age, aes(x=age_group, fill=DIQ010)) +
   geom_bar()
 ```
+
+Determine the posterior probability that someone has diabetes given they are over the age of 40.
+
+First I need to determine the priobrability that someone has diabetes P(B)
+
+```{r}
+df_age %>% 
+  tabyl(DIQ010) 
+
+prior_probability_diabetes <- 0.1
+
+#Note this is different from the probability of the US population which is 0.11
+```
+
+Next I need to determine the prior probability that someone is over 40 P(A)
+
+```{r}
+df_age %>% 
+  tabyl(age_group)
+
+prior_probability_over_40 <- 0.42
+```
+
+Now I need to determine the liklihood of being over 40 and having diabetes P(A\|B)
+
+```{r}
+df_age %>% 
+  tabyl(age_group, DIQ010) %>% 
+  adorn_percentages("col")
+
+liklihood_over_40_has_diabetes <- 0.94
+```
+
+Determine posterior probability using bayes theoreom
+
+```{r}
+( liklihood_over_40_has_diabetes *prior_probability_diabetes ) / prior_probability_over_40
+```
+
+idk
