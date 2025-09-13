@@ -226,9 +226,9 @@ Now I need to determine the liklihood of being over 40 and having diabetes P(A\|
 ```{r}
 df_age %>% 
   tabyl(age_group, DIQ010) %>% 
-  adorn_percentages("col")
+  adorn_percentages("row")
 
-liklihood_over_40_has_diabetes <- 0.94
+liklihood_over_40_has_diabetes <- 0.22
 ```
 
 Determine posterior probability using bayes theoreom
