@@ -208,15 +208,15 @@ For each statement below, indicate whether the statement is true or false. Provi
 
 1.  All prior choices are informative.
 
-    1.   No, some prior choices are not informative, for example a alpha and beta of 1,1. Meaning, there is no prior belief, and therefor the posterior will not be effected.
+    1.  No, some prior choices are not informative, for example a alpha and beta of 1,1. Meaning, there is no prior belief, and therefor the posterior will not be effected.
 
 2.  There may be good reasons for having an informative prior.
 
-    1.   Yes, for example if you're working with population data and your dataset is skewed 30/60 male female, having prior knowledge of the actual population size will help the posterior outcome to be more accurate, or help you take it with a grain of salt.
+    1.  Yes, for example if you're working with population data and your dataset is skewed 30/60 male female, having prior knowledge of the actual population size will help the posterior outcome to be more accurate, or help you take it with a grain of salt.
 
 3.  Any prior choice can be overcome by enough data.
 
-    1.   True.
+    1.  True.
 
 4.  The frequentist paradigm is totally objective.
 
