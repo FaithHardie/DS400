@@ -159,11 +159,17 @@ Practice
 
 1.  The most common value of λ is 4, and the mean is 7.
 
+    s-1/r=4
+
+    s-1=4r
+
+    s=4r+1
+
 ```{r}
-plot_gamma(shape= 3.5, rate= 0.5, mean = TRUE, mode = TRUE)
+plot_gamma(shape= 2.33, rate= 0.33, mean = TRUE, mode = TRUE)
 ```
 
-1.   The most common value of λ is 10 and the mean is 12.
+1.  The most common value of λ is 10 and the mean is 12.
 
 ```{r}
 plot_gamma(shape= 6, rate= 0.5, mean = TRUE, mode = TRUE)

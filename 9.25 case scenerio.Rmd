@@ -1,0 +1,116 @@
+---
+title: "9/25 case scenerio"
+output: html_notebook
+---
+
+9/25 case scenerio
+
+```{r}
+#libraries 
+library(tidyverse)
+library(bayesrules)
+library(tidyverse)
+library(haven)
+library(here)
+library(ggplot2)
+library(janitor)
+library(scales)
+```
+
+```{r}
+# ================================
+# Simple Homelessness Risk Dataset
+# ================================
+
+set.seed(123)
+
+N <- 500  # small dataset
+
+# Basic predictors
+unemployment <- rbinom(N, 1, 0.3)       # 30% unemployed
+eviction <- rbinom(N, 1, 0.1)           # 10% had eviction
+addiction <- rbinom(N, 1, 0.2)          # 20% with addiction
+incarceration <- rbinom(N, 1, 0.15)     # 15% with incarceration history
+
+# True coefficients (for simulation)
+beta0 <- -2.0       # intercept
+b_unemp <- 0.8
+b_evict <- 1.5
+b_addict <- 1.0
+b_incarc <- 0.7
+
+# Linear predictor
+linpred <- beta0 +
+  b_unemp * unemployment +
+  b_evict * eviction +
+  b_addict * addiction +
+  b_incarc * incarceration
+
+# Convert to probability using logistic function
+p <- 1 / (1 + exp(-linpred))
+
+# Outcome: currently homeless (1) or not (0)
+homeless <- rbinom(N, 1, p)
+
+# Put into a data frame
+df_simple <- data.frame(
+  homeless,
+  unemployment,
+  eviction,
+  addiction,
+  incarceration
+)
+
+# Save to CSV
+write.csv(df_simple, "homelessness_risk_simple.csv", row.names = FALSE)
+
+# Quick peek
+head(df_simple, 10)
+
+```
+
+```{r}
+ggplot(data = df_simple, aes(x = homeless, fill=eviction)) +
+  geom_bar()
+```
+
+```{r}
+df_simple %>% 
+  tabyl(homeless) 
+
+prior_probability_is_homeless <- 0.23
+
+```
+
+```{r}
+df_simple %>% 
+  tabyl(eviction) 
+
+prior_probability_eviction <-0.08
+```
+
+```{r}
+df_simple %>% 
+  tabyl(eviction, homeless) %>% 
+  adorn_percentages("col") 
+
+liklihood_is_homeless_and_evicted <- 0.21
+```
+
+```{r}
+(liklihood_is_homeless_and_evicted *prior_probability_is_homeless) / prior_probability_eviction
+```
+
+```{r}
+plot_gamma(shape= 2, rate= 0.1, mean = TRUE, mode = TRUE)
+```
+
+```{r}
+sum(df_simple$eviction)
+
+#plot_gamma(shape= 1, rate= 0.25, mean = TRUE, mode = TRUE)
+```
+
+```{r}
+plot_gamma_poisson(shape = 2, rate = 0.1, sum_y = 500, n = 44)
+```
