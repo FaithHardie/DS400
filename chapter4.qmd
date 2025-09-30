@@ -71,7 +71,7 @@ Let π (a random value between 0 and 1) denote the unknown proportion of recent 
 The Feminist: Use `plot_beta()` to visualize the prior
 
 ```{r}
-plot_beta(5, 11)
+plot_beta(10, 11)
 ```
 
 The Clueless: Use `plot_beta()` to visualize the prior
