@@ -108,7 +108,7 @@ plot_gamma(shape= 2, rate= 0.1, mean = TRUE, mode = TRUE)
 ```{r}
 sum(df_simple$eviction)
 
-#plot_gamma(shape= 1, rate= 0.25, mean = TRUE, mode = TRUE)
+plot_gamma(shape= 1, rate= 0.25, mean = TRUE, mode = TRUE)
 ```
 
 ```{r}
