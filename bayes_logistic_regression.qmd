@@ -205,7 +205,7 @@ Questions:
 4.  Use `exp(posterior_interval()` to interpret key predictors
 
     ```{r}
-
+     exp(posterior_interval(hotel_model1, prob=0.80))
     ```
 
 5.  Use `classification_summary` to interpret model accuracy
