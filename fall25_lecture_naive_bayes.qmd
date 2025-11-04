@@ -380,16 +380,17 @@ naive_model
 -   Then, show the math similar to how we did above to confirm your results
 
 ```{r}
-data("pulse_of_the_nation")
+#data("pulse_of_the_nation")
+?pulse_of_the_nation
 ```
 
 ```{r}
-naive_model_2 <- naiveBayes(climate_change ~ science_is_honest + earth_sun + vaccines_are_safe, data = pulse_of_the_nation)
+naive_model_2 <- naiveBayes(climate_change ~ science_is_honest + party + vaccines_are_safe, data = pulse_of_the_nation)
 
 ```
 
 ```{r}
-our_person <- data.frame(science_is_honest = "Strongly Disagree", earth_sun = "false", vaccines_are_safe = "Strongly Disagree")
+our_person <- data.frame(science_is_honest = "Strongly Disagree", party= "republican", vaccines_are_safe = "Strongly Disagree")
 ```
 
 ```{r}
